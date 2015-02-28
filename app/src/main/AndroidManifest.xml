@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SecondApp"
+            android:label="@string/title_activity_calculator" >
+        </activity>
+        <activity
+            android:name=".FirstApp"
+            android:label="@string/title_activity_first_app" >
+        </activity>
     </application>
 
 </manifest>

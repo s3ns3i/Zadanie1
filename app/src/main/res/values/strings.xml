@@ -16,12 +16,16 @@
     <string name="zero">0</string>
     <string name="add">+</string>
     <string name="multiply">x</string>
-    <string name="substract">-</string>
+    <string name="subtract">-</string>
     <string name="equals">=</string>
     <string name="dot">.</string>
     <string name="erase">&lt;-</string>
     <string name="divide">/</string>
     <string name="clear">C</string>
     <string name="clearEverything">CE</string>
+    <string name="title_activity_calculator">Calculator</string>
+    <string name="title_activity_first_app">FirstApp</string>
+    <string name="firstApp">Testowa Apka</string>
+    <string name="secondApp">Kalkulator Prosty</string>
 
 </resources>
