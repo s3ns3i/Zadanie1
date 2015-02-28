@@ -51,8 +51,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firstVariable = Double.valueOf(0.0);
-        secondVariable = Double.valueOf(0.0);
+        firstVariable = 0.0;
+        secondVariable = 0.0;
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
         button2 = (Button) findViewById(R.id.button2);
@@ -275,19 +275,33 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 operationTextView.setText("/");
                 break;
             case R.id.equalsButton:
-                switch(operationTextView.getText().toString().charAt(0))
-            case '+':
-                Double result =
-                        Double.valueOf(displayTextView.getText().toString())
-                        + Double.valueOf(display2TextView.getText().toString());
-                displayTextView.setText(String.valueOf(result));
-                break;
-            case '-':
-                break;
-            case '/':
-                break;
-            case '*':
-                break;
+                Double result;
+                switch(operationTextView.getText().toString().charAt(0)){
+                case '+':
+                    result =
+                            Double.valueOf(display2TextView.getText().toString())
+                            + Double.valueOf(displayTextView.getText().toString());
+                    displayTextView.setText(String.valueOf(result));
+                    break;
+                case '-':
+                    result =
+                            Double.valueOf(display2TextView.getText().toString())
+                                    - Double.valueOf(displayTextView.getText().toString());
+                    displayTextView.setText(String.valueOf(result));
+                    break;
+                case '/':
+                    result =
+                            Double.valueOf(display2TextView.getText().toString())
+                                    / Double.valueOf(displayTextView.getText().toString());
+                    displayTextView.setText(String.valueOf(result));
+                    break;
+                case '*':
+                    result =
+                            Double.valueOf(display2TextView.getText().toString())
+                                    * Double.valueOf(displayTextView.getText().toString());
+                    displayTextView.setText(String.valueOf(result));
+                    break;
+                }
                 break;
             case R.id.clearButton:
                 displayTextView.setText("");
