@@ -16,7 +16,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
 //    private Double firstVariable
 //            , secondVariable;
     private TextView displayTextView
-            , display2TextView
+            , resultTextView
             , operationTextView;
     private Button zeroButton
     , oneButton
@@ -45,7 +45,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
 //        firstVariable = 0.0;
 //        secondVariable = 0.0;
         displayTextView = (TextView) findViewById(R.id.displayTextView);
-        display2TextView = (TextView) findViewById(R.id.display2TextView);
+        resultTextView = (TextView) findViewById(R.id.resultTextView);
         operationTextView = (TextView) findViewById(R.id.operationTextView);
         zeroButton = (Button) findViewById(R.id.zeroButton);
         zeroButton.setOnClickListener(this);
@@ -162,7 +162,8 @@ public class SecondApp extends Activity implements View.OnClickListener {
                 //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.addButton:
-                operationButtonAction('+', '+');
+                operationButtonAction('+');
+                //operationButtonAction('+', '+');
 //                if(secondVariable != 0.0 && operation != '\0' && firstVariable != 0.0)
 //                    secondVariable = doMath(firstVariable, secondVariable, operation);
 //                else
@@ -172,64 +173,72 @@ public class SecondApp extends Activity implements View.OnClickListener {
 //                operationTextView.setText("+");
                 break;
             case R.id.substractButton:
-                operationButtonAction('-', '-');
+                operationButtonAction('-');
+                //operationButtonAction('-', '-');
 //                secondVariable = firstVariable;
 //                display2TextView.setText(Double.toString(secondVariable));
 //                displayTextView.setText("");
 //                operationTextView.setText("-");
                 break;
             case R.id.multiplyButton:
-                operationButtonAction('*', '*');
+                operationButtonAction('*');
+                //operationButtonAction('*', '*');
 //                secondVariable = firstVariable;
 //                display2TextView.setText(Double.toString(secondVariable));
 //                displayTextView.setText("");
 //                operationTextView.setText("*");
                 break;
             case R.id.divideButton:
-                operationButtonAction('/', '/');
+                operationButtonAction('/');
+                //operationButtonAction('/', '/');
 //                secondVariable = firstVariable;
 //                display2TextView.setText(Double.toString(secondVariable));
 //                displayTextView.setText("");
 //                operationTextView.setText("/");
                 break;
             case R.id.equalsButton:
-                Double a = Double.valueOf(display2TextView.getText().toString())
-                        , b = Double.valueOf(displayTextView.getText().toString());
-                Double result;
-                switch(operation){
-                    case '+':
-                        result = doMath(a, b, '+');
-//                                Double.valueOf(display2TextView.getText().toString())
-//                                        + Double.valueOf(displayTextView.getText().toString());
-                        displayTextView.setText(String.valueOf(result));
-                        break;
-                    case '-':
-                        result = doMath(a, b, '-');
-//                                Double.valueOf(display2TextView.getText().toString())
-//                                        - Double.valueOf(displayTextView.getText().toString());
-                        displayTextView.setText(String.valueOf(result));
-                        break;
-                    case '/':
-                        result = doMath(a, b, '/');
-//                                Double.valueOf(display2TextView.getText().toString())
-//                                        / Double.valueOf(displayTextView.getText().toString());
-                        displayTextView.setText(String.valueOf(result));
-                        break;
-                    case '*':
-                        result = doMath(a, b, '*');
-//                                Double.valueOf(display2TextView.getText().toString())
-//                                        * Double.valueOf(displayTextView.getText().toString());
-                        displayTextView.setText(String.valueOf(result));
-                        break;
-                }
-                displayTextView.setText("");
+                operationButtonAction(operation);
+//                Double a = Double.valueOf(display2TextView.getText().toString())
+//                        , b = Double.valueOf(displayTextView.getText().toString());
+//                Double result;
+//                switch(operation){
+//                    case '+':
+//                        result = doMath(a, b, '+');
+////                                Double.valueOf(display2TextView.getText().toString())
+////                                        + Double.valueOf(displayTextView.getText().toString());
+//                        displayTextView.setText(String.valueOf(result));
+//                        break;
+//                    case '-':
+//                        result = doMath(a, b, '-');
+////                                Double.valueOf(display2TextView.getText().toString())
+////                                        - Double.valueOf(displayTextView.getText().toString());
+//                        displayTextView.setText(String.valueOf(result));
+//                        break;
+//                    case '/':
+//                        result = doMath(a, b, '/');
+////                                Double.valueOf(display2TextView.getText().toString())
+////                                        / Double.valueOf(displayTextView.getText().toString());
+//                        displayTextView.setText(String.valueOf(result));
+//                        break;
+//                    case '*':
+//                        result = doMath(a, b, '*');
+////                                Double.valueOf(display2TextView.getText().toString())
+////                                        * Double.valueOf(displayTextView.getText().toString());
+//                        displayTextView.setText(String.valueOf(result));
+//                        break;
+//                    default:
+//                        //display2TextView.setText(displayTextView.getText().toString());
+//                        //displayTextView.setText("");
+//                        break;
+//                }
+//                displayTextView.setText("");
                 break;
             case R.id.clearButton:
                 displayTextView.setText("");
                 break;
             case R.id.clearEverythingButton:
                 displayTextView.setText("");
-                display2TextView.setText("");
+                resultTextView.setText("");
                 operationTextView.setText("");
                 result = 0.0;
                 //secondVariable = 0.0;
@@ -262,8 +271,31 @@ public class SecondApp extends Activity implements View.OnClickListener {
         }
         return result;
     }
-    private void operationButtonAction(Character operation, Character nextOperation){
-//        Double a = result, b = Double.valueOf(display2TextView.getText().toString());
+    private void operationButtonAction(Character operation){
+    //private void operationButtonAction(Character operation, Character nextOperation){
+        Double a, b;
+        if(displayTextView.getText().toString().isEmpty())
+            a = 0.0;
+        else
+            a = Double.valueOf(displayTextView.getText().toString());
+        if(resultTextView.getText().toString().isEmpty())
+            b = 0.0;
+        else
+            b = Double.valueOf(resultTextView.getText().toString());
+        if(displayTextView.getText().toString().isEmpty()){}
+        else if(!displayTextView.getText().toString().isEmpty() && resultTextView.getText().toString().isEmpty()){
+            result = b;
+            resultTextView.setText(Double.toString(a));
+            displayTextView.setText("");
+            operationTextView.setText(String.valueOf(operation));
+        }
+        else if(!displayTextView.getText().toString().isEmpty()){
+            result = doMath(a, b, operation);
+            resultTextView.setText(Double.toString(result));
+            displayTextView.setText("");
+            operationTextView.setText(String.valueOf(operation));
+        }
+
 //        if(display2TextView.getText().charAt(0) != '\0' && operation != '\0')
 //            result = doMath(a, b, operation);
 //        //else if (a != 0.0)

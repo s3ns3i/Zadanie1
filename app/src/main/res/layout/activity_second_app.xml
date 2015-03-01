@@ -193,7 +193,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/display2TextView"
+        android:id="@+id/resultTextView"
         android:layout_above="@+id/displayTextView"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView" />
@@ -203,9 +203,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/operationTextView"
         android:textAlignment="textEnd"
-        android:text="lol"
-        android:layout_below="@+id/display2TextView"
-        android:layout_alignRight="@+id/display2TextView"
-        android:layout_alignEnd="@+id/display2TextView" />
+        android:layout_below="@+id/resultTextView"
+        android:layout_alignRight="@+id/resultTextView"
+        android:layout_alignEnd="@+id/resultTextView" />
 
 </RelativeLayout>
