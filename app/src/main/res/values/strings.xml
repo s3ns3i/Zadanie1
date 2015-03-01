@@ -23,7 +23,7 @@
     <string name="divide">/</string>
     <string name="clear">C</string>
     <string name="clearEverything">CE</string>
-    <string name="title_activity_calculator">Calculator</string>
+    <string name="title_activity_calculator">SecondApp</string>
     <string name="title_activity_first_app">FirstApp</string>
     <string name="firstApp">Testowa Apka</string>
     <string name="secondApp">Kalkulator Prosty</string>

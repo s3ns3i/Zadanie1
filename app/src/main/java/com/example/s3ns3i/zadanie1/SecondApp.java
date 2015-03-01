@@ -13,8 +13,6 @@ import android.widget.Toast;
 public class SecondApp extends Activity implements View.OnClickListener {
 
     private Double result = 0.0;
-//    private Double firstVariable
-//            , secondVariable;
     private TextView displayTextView
             , resultTextView
             , operationTextView;
@@ -42,8 +40,6 @@ public class SecondApp extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_app);
-//        firstVariable = 0.0;
-//        secondVariable = 0.0;
         displayTextView = (TextView) findViewById(R.id.displayTextView);
         resultTextView = (TextView) findViewById(R.id.resultTextView);
         operationTextView = (TextView) findViewById(R.id.operationTextView);
@@ -91,7 +87,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_calculator, menu);
+        getMenuInflater().inflate(R.menu.menu_second_app, menu);
         return true;
     }
 
@@ -112,126 +108,60 @@ public class SecondApp extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //Double firstVariable = 0.0;
         String number = displayTextView.getText().toString();
-        Character operation = operationTextView.getText().charAt(0);
-        //result = Double.valueOf(display2TextView.getText().toString());
+        Character operation;
+        if(operationTextView.getText().toString().isEmpty())
+            operation = '\0';
+        else
+            operation = operationTextView.getText().charAt(0);
         switch(v.getId()){
             case R.id.zeroButton:
                 displayTextView.setText(number + String.valueOf(0));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.oneButton:
                 displayTextView.setText(number + String.valueOf(1));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.twoButton:
                 displayTextView.setText(number + String.valueOf(2));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.threeButton:
                 displayTextView.setText(number + String.valueOf(3));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.fourButton:
                 displayTextView.setText(number + String.valueOf(4));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.fiveButton:
                 displayTextView.setText(number + String.valueOf(5));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.sixButton:
                 displayTextView.setText(number + String.valueOf(6));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.sevenButton:
                 displayTextView.setText(number + String.valueOf(7));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.eightButton:
                 displayTextView.setText(number + String.valueOf(8));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.nineButton:
                 displayTextView.setText(number + String.valueOf(9));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.dotButton:
                 displayTextView.setText(number + String.valueOf('.'));
-                //result = Double.valueOf(displayTextView.getText().toString());
                 break;
             case R.id.addButton:
                 operationButtonAction('+');
-                //operationButtonAction('+', '+');
-//                if(secondVariable != 0.0 && operation != '\0' && firstVariable != 0.0)
-//                    secondVariable = doMath(firstVariable, secondVariable, operation);
-//                else
-//                    secondVariable = firstVariable;
-//                display2TextView.setText(Double.toString(secondVariable));
-//                displayTextView.setText("");
-//                operationTextView.setText("+");
                 break;
             case R.id.substractButton:
                 operationButtonAction('-');
-                //operationButtonAction('-', '-');
-//                secondVariable = firstVariable;
-//                display2TextView.setText(Double.toString(secondVariable));
-//                displayTextView.setText("");
-//                operationTextView.setText("-");
                 break;
             case R.id.multiplyButton:
                 operationButtonAction('*');
-                //operationButtonAction('*', '*');
-//                secondVariable = firstVariable;
-//                display2TextView.setText(Double.toString(secondVariable));
-//                displayTextView.setText("");
-//                operationTextView.setText("*");
                 break;
             case R.id.divideButton:
                 operationButtonAction('/');
-                //operationButtonAction('/', '/');
-//                secondVariable = firstVariable;
-//                display2TextView.setText(Double.toString(secondVariable));
-//                displayTextView.setText("");
-//                operationTextView.setText("/");
                 break;
             case R.id.equalsButton:
                 operationButtonAction(operation);
-//                Double a = Double.valueOf(display2TextView.getText().toString())
-//                        , b = Double.valueOf(displayTextView.getText().toString());
-//                Double result;
-//                switch(operation){
-//                    case '+':
-//                        result = doMath(a, b, '+');
-////                                Double.valueOf(display2TextView.getText().toString())
-////                                        + Double.valueOf(displayTextView.getText().toString());
-//                        displayTextView.setText(String.valueOf(result));
-//                        break;
-//                    case '-':
-//                        result = doMath(a, b, '-');
-////                                Double.valueOf(display2TextView.getText().toString())
-////                                        - Double.valueOf(displayTextView.getText().toString());
-//                        displayTextView.setText(String.valueOf(result));
-//                        break;
-//                    case '/':
-//                        result = doMath(a, b, '/');
-////                                Double.valueOf(display2TextView.getText().toString())
-////                                        / Double.valueOf(displayTextView.getText().toString());
-//                        displayTextView.setText(String.valueOf(result));
-//                        break;
-//                    case '*':
-//                        result = doMath(a, b, '*');
-////                                Double.valueOf(display2TextView.getText().toString())
-////                                        * Double.valueOf(displayTextView.getText().toString());
-//                        displayTextView.setText(String.valueOf(result));
-//                        break;
-//                    default:
-//                        //display2TextView.setText(displayTextView.getText().toString());
-//                        //displayTextView.setText("");
-//                        break;
-//                }
-//                displayTextView.setText("");
                 break;
             case R.id.clearButton:
                 displayTextView.setText("");
@@ -250,7 +180,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
         }
     }
     private Double doMath(Double a, Double b, Character operation){
-        Double result = Double.valueOf(0.0);
+        Double result = 0.0;
         switch(operation){
             case '+':
                 result = a + b;
@@ -272,20 +202,26 @@ public class SecondApp extends Activity implements View.OnClickListener {
         return result;
     }
     private void operationButtonAction(Character operation){
-    //private void operationButtonAction(Character operation, Character nextOperation){
         Double a, b;
-        if(displayTextView.getText().toString().isEmpty())
+        if(resultTextView.getText().toString().isEmpty())
             a = 0.0;
         else
-            a = Double.valueOf(displayTextView.getText().toString());
-        if(resultTextView.getText().toString().isEmpty())
+            a = Double.valueOf(resultTextView.getText().toString());
+        if(displayTextView.getText().toString().isEmpty())
             b = 0.0;
         else
-            b = Double.valueOf(resultTextView.getText().toString());
-        if(displayTextView.getText().toString().isEmpty()){}
+            b = Double.valueOf(displayTextView.getText().toString());
+        if(displayTextView.getText().toString().isEmpty() && !resultTextView.getText().toString().isEmpty())
+            operationTextView.setText(String.valueOf(operation));
+        else if(!displayTextView.getText().toString().isEmpty() && !resultTextView.getText().toString().isEmpty() && operationTextView.getText().toString().isEmpty()){
+            resultTextView.setText(displayTextView.getText().toString());
+            operationTextView.setText(String.valueOf(operation));
+            displayTextView.setText("");
+        }
+        //else if(displayTextView.getText().toString().isEmpty() && resultTextView.getText().toString().isEmpty()){}
         else if(!displayTextView.getText().toString().isEmpty() && resultTextView.getText().toString().isEmpty()){
             result = b;
-            resultTextView.setText(Double.toString(a));
+            resultTextView.setText(Double.toString(b));
             displayTextView.setText("");
             operationTextView.setText(String.valueOf(operation));
         }
@@ -293,25 +229,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
             result = doMath(a, b, operation);
             resultTextView.setText(Double.toString(result));
             displayTextView.setText("");
-            operationTextView.setText(String.valueOf(operation));
+            operationTextView.setText("");
         }
-
-//        if(display2TextView.getText().charAt(0) != '\0' && operation != '\0')
-//            result = doMath(a, b, operation);
-//        //else if (a != 0.0)
-//
-//        display2TextView.setText(Double.toString(result));
-//        displayTextView.setText("");
-//        operationTextView.setText(String.valueOf(nextOperation));
-//        if(secondVariable != 0.0 && operation != '\0' && operationTextView.getText().charAt(0) != '\0')
-//            secondVariable = doMath(secondVariable, result, operation);
-//        else if (result != 0.0)
-//            secondVariable = result;
-//        else
-//            return;
-//        display2TextView.setText(Double.toString(secondVariable));
-//        displayTextView.setText("");
-//        operationTextView.setText(String.valueOf(nextOperation));
-        return;
     }
 }
