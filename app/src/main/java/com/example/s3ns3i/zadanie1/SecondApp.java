@@ -146,7 +146,8 @@ public class SecondApp extends Activity implements View.OnClickListener {
                 displayTextView.setText(number + String.valueOf(9));
                 break;
             case R.id.dotButton:
-                displayTextView.setText(number + String.valueOf('.'));
+                if(!displayTextView.getText().toString().contains("."))
+                    displayTextView.setText(number + String.valueOf('.'));
                 break;
             case R.id.addButton:
                 operationButtonAction('+');
