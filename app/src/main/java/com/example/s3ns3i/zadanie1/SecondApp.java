@@ -192,7 +192,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
                 try {
                     result = a / b;
                 } catch (ArithmeticException e){
-                    Toast.makeText(this, "You really tried to divide by zero. Dude. You want to destroy Universe?", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "You really tried to divide by zero. Dude. You want to destroy Universe?", Toast.LENGTH_LONG).show();
                 }
                 break;
             case '*':
