@@ -180,25 +180,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/displayTextView"
         android:layout_above="@+id/clearEverythingButton"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignLeft="@+id/clearEverythingButton"
+        android:layout_alignStart="@+id/clearEverythingButton"
         android:textAlignment="textEnd"
-        android:textSize="22dp" />
+        android:textSize="22sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/resultTextView"
         android:layout_above="@+id/displayTextView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:textSize="22dp" />
+        android:layout_alignLeft="@+id/displayTextView"
+        android:layout_alignStart="@+id/displayTextView"
+        android:textSize="22sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -208,6 +206,6 @@
         android:layout_below="@+id/resultTextView"
         android:layout_alignRight="@+id/resultTextView"
         android:layout_alignEnd="@+id/resultTextView"
-        android:textSize="22dp" />
+        android:textSize="22sp" />
 
 </RelativeLayout>
