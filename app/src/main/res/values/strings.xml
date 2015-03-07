@@ -27,5 +27,7 @@
     <string name="title_activity_first_app">FirstApp</string>
     <string name="firstApp">Testowa Apka</string>
     <string name="secondApp">Kalkulator Prosty</string>
+    <string name="title_activity_third_app">ThirdApp</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

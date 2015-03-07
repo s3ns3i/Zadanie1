@@ -24,6 +24,10 @@
             android:name=".FirstApp"
             android:label="@string/title_activity_first_app" >
         </activity>
+        <activity
+            android:name=".ThirdApp"
+            android:label="@string/title_activity_third_app" >
+        </activity>
     </application>
 
 </manifest>
