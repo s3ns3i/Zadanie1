@@ -1,15 +1,19 @@
 package com.example.s3ns3i.zadanie1;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ThirdApp extends ActionBarActivity {
@@ -53,14 +57,37 @@ public class ThirdApp extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        //Path to the music folder.
+        final String MEDIA_PATH = new String("/sdcard/Music/");
+
+        private ArrayList<MediaStore.Audio.Media>
+        //private ArrayList<HashMap<String, String>> songList = new ArrayList<HashMap<String, String>>();
+
         public PlaceholderFragment() {
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_third_app, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_third_app_2, container, false);
+
+            //Reading songs from our folder.
+            getPlaylist();
             return rootView;
+        }
+
+        private void getPlaylist(){
+            File musicFolder = new File(MEDIA_PATH);
+
+            //Inner class that lists files with extension .mp3 and .MP3
+            if(musicFolder.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String filename) {
+                    return (filename.endsWith(".mp3") || filename.endsWith(".MP3"));
+                }
+            }).length > 0){
+
+            }
         }
     }
 }

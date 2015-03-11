@@ -12,7 +12,8 @@ import android.widget.Button;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private Button button
-            , button2;
+            , button2
+            , button3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         button.setOnClickListener(this);
         button2 = (Button) findViewById(R.id.button2);
         button2.setOnClickListener(this);
+        button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(this);
     }
 
 
@@ -57,6 +60,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.button2:
                 intent = new Intent(this, SecondApp.class);
+                startActivity(intent);
+                break;
+            case R.id.button3:
+                intent = new Intent(this, ThirdApp.class);
                 startActivity(intent);
                 break;
         }

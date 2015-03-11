@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.s3ns3i.zadanie1" >
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -26,7 +27,8 @@
         </activity>
         <activity
             android:name=".ThirdApp"
-            android:label="@string/title_activity_third_app" >
+            android:label="@string/title_activity_third_app"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
     </application>
 
