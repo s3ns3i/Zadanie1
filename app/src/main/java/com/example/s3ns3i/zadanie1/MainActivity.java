@@ -59,7 +59,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.button2:
-                intent = new Intent(this, SecondApp.class);
+                intent = new Intent(this, SplashScreen.class);
                 startActivity(intent);
                 break;
             case R.id.button3:

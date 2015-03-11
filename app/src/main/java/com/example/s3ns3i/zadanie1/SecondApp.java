@@ -203,7 +203,18 @@ public class SecondApp extends Activity implements View.OnClickListener {
         return result;
     }
     private void operationButtonAction(Character operation){
+        //Possible actions:
+        //We have one number and we hit operation button
+        //We have one number and we hit equals button
+        //We have two numbers with operation and we hit operation button
+        //We have two numbers with operation and we hit equals button
+        //We divide by zero
+        //We have no numbers and we hit euqals button
+        //We have a result, we type a new number and hit operation button
+        //We have a result and we hit operation button
         Double a, b;
+
+        //Setting values of the variables
         if(resultTextView.getText().toString().isEmpty())
             a = 0.0;
         else
@@ -212,14 +223,20 @@ public class SecondApp extends Activity implements View.OnClickListener {
             b = 0.0;
         else
             b = Double.valueOf(displayTextView.getText().toString());
+
+        //We have a result and we hit operation button
         if(displayTextView.getText().toString().isEmpty() && !resultTextView.getText().toString().isEmpty())
             operationTextView.setText(String.valueOf(operation));
+
+        //We have a result, we type a new number and hit operation button
         else if(!displayTextView.getText().toString().isEmpty() && !resultTextView.getText().toString().isEmpty() && operationTextView.getText().toString().isEmpty()){
             resultTextView.setText(displayTextView.getText().toString());
             operationTextView.setText(String.valueOf(operation));
             displayTextView.setText("");
         }
-        //else if(displayTextView.getText().toString().isEmpty() && resultTextView.getText().toString().isEmpty()){}
+
+        //We have one number and we hit operation button
+        //We have one number and we hit equals button
         else if(!displayTextView.getText().toString().isEmpty() && resultTextView.getText().toString().isEmpty()){
             result = b;
             resultTextView.setText(Double.toString(b));

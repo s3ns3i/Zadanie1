@@ -60,7 +60,7 @@ public class ThirdApp extends ActionBarActivity {
         //Path to the music folder.
         final String MEDIA_PATH = new String("/sdcard/Music/");
 
-        private ArrayList<MediaStore.Audio.Media>
+        //private ArrayList<MediaStore.Audio.Media>
         //private ArrayList<HashMap<String, String>> songList = new ArrayList<HashMap<String, String>>();
 
         public PlaceholderFragment() {

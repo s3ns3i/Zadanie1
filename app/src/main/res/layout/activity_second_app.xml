@@ -155,15 +155,16 @@
         android:layout_height="wrap_content"
         android:text="@string/clearEverything"
         android:id="@+id/clearEverythingButton"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/sevenButton"
-        android:layout_alignStart="@+id/sevenButton" />
+        android:layout_above="@+id/sevenButton"
+        android:layout_toLeftOf="@+id/eightButton"
+        android:layout_toStartOf="@+id/eightButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/clear"
         android:id="@+id/clearButton"
+        android:layout_above="@+id/eightButton"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/sevenButton"
         android:layout_toEndOf="@+id/sevenButton" />
@@ -173,6 +174,7 @@
         android:layout_height="wrap_content"
         android:text="@string/erase"
         android:id="@+id/eraseButton"
+        android:layout_above="@+id/nineButton"
         android:layout_alignTop="@+id/clearButton"
         android:layout_toRightOf="@+id/eightButton"
         android:layout_toEndOf="@+id/eightButton" />
