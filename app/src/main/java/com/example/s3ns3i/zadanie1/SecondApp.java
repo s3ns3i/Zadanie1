@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 public class SecondApp extends Activity implements View.OnClickListener {
 
-    private Double result = 0.0;
     private TextView displayTextView
             , resultTextView
             , operationTextView;
@@ -109,11 +108,6 @@ public class SecondApp extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         String number = displayTextView.getText().toString();
-        Character operation;
-        if(operationTextView.getText().toString().isEmpty())
-            operation = '\0';
-        else
-            operation = operationTextView.getText().charAt(0);
         switch(v.getId()){
             case R.id.zeroButton:
                 displayTextView.setText(number + String.valueOf(0));
@@ -162,7 +156,7 @@ public class SecondApp extends Activity implements View.OnClickListener {
                 operationButtonAction('/');
                 break;
             case R.id.equalsButton:
-                operationButtonAction(operation);
+                operationButtonAction('e');
                 break;
             case R.id.clearButton:
                 displayTextView.setText("");
@@ -171,8 +165,6 @@ public class SecondApp extends Activity implements View.OnClickListener {
                 displayTextView.setText("");
                 resultTextView.setText("");
                 operationTextView.setText("");
-                result = 0.0;
-                //secondVariable = 0.0;
                 break;
             case R.id.eraseButton:
                 if(number.length() > 0)
@@ -190,29 +182,27 @@ public class SecondApp extends Activity implements View.OnClickListener {
                 result = a - b;
                 break;
             case '/':
-                try {
-                    result = a / b;
-                } catch (ArithmeticException e){
-                    Toast.makeText(this, "You really tried to divide by zero. Dude. You want to destroy Universe?", Toast.LENGTH_LONG).show();
-                }
+                //We divide by zero
+                if (b == 0.0)
+                    Toast.makeText(this, "You really tried to divide by zero. Dude. You want to destroy the Universe?", Toast.LENGTH_LONG).show();
+                else
+                result = a / b;
                 break;
             case '*':
                 result = a * b;
                 break;
+            default:
+                resultTextView.setText(displayTextView.getText());
+                displayTextView.setText("test, mate");
+                break;
         }
         return result;
     }
-    private void operationButtonAction(Character operation){
-        //Possible actions:
-        //We have one number and we hit operation button
-        //We have one number and we hit equals button
-        //We have two numbers with operation and we hit operation button
-        //We have two numbers with operation and we hit equals button
-        //We divide by zero
-        //We have no numbers and we hit euqals button
-        //We have a result, we type a new number and hit operation button
-        //We have a result and we hit operation button
-        Double a, b;
+    private void operationButtonAction(Character nextOperation){
+        Double a, b, c;
+        String display = displayTextView.getText().toString()
+                , result = resultTextView.getText().toString()
+                , currentOperation = operationTextView.getText().toString();
 
         //Setting values of the variables
         if(resultTextView.getText().toString().isEmpty())
@@ -224,30 +214,26 @@ public class SecondApp extends Activity implements View.OnClickListener {
         else
             b = Double.valueOf(displayTextView.getText().toString());
 
-        //We have a result and we hit operation button
-        if(displayTextView.getText().toString().isEmpty() && !resultTextView.getText().toString().isEmpty())
-            operationTextView.setText(String.valueOf(operation));
-
-        //We have a result, we type a new number and hit operation button
-        else if(!displayTextView.getText().toString().isEmpty() && !resultTextView.getText().toString().isEmpty() && operationTextView.getText().toString().isEmpty()){
-            resultTextView.setText(displayTextView.getText().toString());
-            operationTextView.setText(String.valueOf(operation));
+        //Three states:
+        //Empty
+        //Display
+        //Display and Result
+        if(!display.isEmpty() && !result.isEmpty()){
+            c = doMath(a, b, currentOperation.charAt(0));
+            resultTextView.setText(String.valueOf(c));
             displayTextView.setText("");
+            if (nextOperation == 'e')
+                operationTextView.setText("");
+            else
+                operationTextView.setText(nextOperation.toString());
         }
-
-        //We have one number and we hit operation button
-        //We have one number and we hit equals button
-        else if(!displayTextView.getText().toString().isEmpty() && resultTextView.getText().toString().isEmpty()){
-            result = b;
-            resultTextView.setText(Double.toString(b));
+        else if(!display.isEmpty()){
+            resultTextView.setText(displayTextView.getText());
             displayTextView.setText("");
-            operationTextView.setText(String.valueOf(operation));
+            operationTextView.setText(nextOperation.toString());
         }
-        else if(!displayTextView.getText().toString().isEmpty()){
-            result = doMath(a, b, operation);
-            resultTextView.setText(Double.toString(result));
-            displayTextView.setText("");
-            operationTextView.setText("");
+        else if(!result.isEmpty()){
+            operationTextView.setText(nextOperation.toString());
         }
     }
 }

@@ -13,7 +13,8 @@
         android:id="@+id/dotButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,7 +23,8 @@
         android:id="@+id/zeroButton"
         android:layout_alignTop="@+id/dotButton"
         android:layout_toRightOf="@+id/dotButton"
-        android:layout_toEndOf="@+id/dotButton" />
+        android:layout_toEndOf="@+id/dotButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,7 +33,8 @@
         android:id="@+id/equalsButton"
         android:layout_alignTop="@+id/zeroButton"
         android:layout_toRightOf="@+id/zeroButton"
-        android:layout_toEndOf="@+id/zeroButton" />
+        android:layout_toEndOf="@+id/zeroButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +43,8 @@
         android:id="@+id/oneButton"
         android:layout_above="@+id/dotButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,7 +53,8 @@
         android:id="@+id/twoButton"
         android:layout_alignTop="@+id/oneButton"
         android:layout_toRightOf="@+id/dotButton"
-        android:layout_toEndOf="@+id/dotButton" />
+        android:layout_toEndOf="@+id/dotButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -58,7 +63,8 @@
         android:id="@+id/threeButton"
         android:layout_alignTop="@+id/twoButton"
         android:layout_toRightOf="@+id/zeroButton"
-        android:layout_toEndOf="@+id/zeroButton" />
+        android:layout_toEndOf="@+id/zeroButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -67,7 +73,8 @@
         android:id="@+id/fourButton"
         android:layout_above="@+id/oneButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -76,7 +83,8 @@
         android:id="@+id/fiveButton"
         android:layout_alignTop="@+id/fourButton"
         android:layout_toRightOf="@+id/oneButton"
-        android:layout_toEndOf="@+id/oneButton" />
+        android:layout_toEndOf="@+id/oneButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -85,7 +93,8 @@
         android:id="@+id/sixButton"
         android:layout_above="@+id/twoButton"
         android:layout_toRightOf="@+id/twoButton"
-        android:layout_toEndOf="@+id/twoButton" />
+        android:layout_toEndOf="@+id/twoButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -94,7 +103,8 @@
         android:id="@+id/sevenButton"
         android:layout_above="@+id/fourButton"
         android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentStart="false"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -103,7 +113,8 @@
         android:id="@+id/eightButton"
         android:layout_alignTop="@+id/sevenButton"
         android:layout_toRightOf="@+id/fourButton"
-        android:layout_toEndOf="@+id/fourButton" />
+        android:layout_toEndOf="@+id/fourButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -112,7 +123,8 @@
         android:id="@+id/nineButton"
         android:layout_alignTop="@+id/eightButton"
         android:layout_toRightOf="@+id/fiveButton"
-        android:layout_toEndOf="@+id/fiveButton" />
+        android:layout_toEndOf="@+id/fiveButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -121,7 +133,8 @@
         android:id="@+id/addButton"
         android:layout_alignTop="@+id/equalsButton"
         android:layout_toRightOf="@+id/equalsButton"
-        android:layout_toEndOf="@+id/equalsButton" />
+        android:layout_toEndOf="@+id/equalsButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -130,7 +143,8 @@
         android:id="@+id/substractButton"
         android:layout_alignBottom="@+id/threeButton"
         android:layout_alignLeft="@+id/addButton"
-        android:layout_alignStart="@+id/addButton" />
+        android:layout_alignStart="@+id/addButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -139,7 +153,8 @@
         android:id="@+id/multiplyButton"
         android:layout_above="@+id/threeButton"
         android:layout_toRightOf="@+id/threeButton"
-        android:layout_toEndOf="@+id/threeButton" />
+        android:layout_toEndOf="@+id/threeButton"
+        android:textSize="22dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -148,7 +163,8 @@
         android:id="@+id/divideButton"
         android:layout_alignTop="@+id/nineButton"
         android:layout_alignLeft="@+id/multiplyButton"
-        android:layout_alignStart="@+id/multiplyButton" />
+        android:layout_alignStart="@+id/multiplyButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -157,7 +173,8 @@
         android:id="@+id/clearEverythingButton"
         android:layout_above="@+id/sevenButton"
         android:layout_toLeftOf="@+id/eightButton"
-        android:layout_toStartOf="@+id/eightButton" />
+        android:layout_toStartOf="@+id/eightButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -167,7 +184,8 @@
         android:layout_above="@+id/eightButton"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/sevenButton"
-        android:layout_toEndOf="@+id/sevenButton" />
+        android:layout_toEndOf="@+id/sevenButton"
+        android:textSize="22sp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -177,7 +195,8 @@
         android:layout_above="@+id/nineButton"
         android:layout_alignTop="@+id/clearButton"
         android:layout_toRightOf="@+id/eightButton"
-        android:layout_toEndOf="@+id/eightButton" />
+        android:layout_toEndOf="@+id/eightButton"
+        android:textSize="22sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -188,7 +207,7 @@
         android:layout_alignLeft="@+id/clearEverythingButton"
         android:layout_alignStart="@+id/clearEverythingButton"
         android:textAlignment="textEnd"
-        android:textSize="22sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -198,16 +217,18 @@
         android:layout_above="@+id/displayTextView"
         android:layout_alignLeft="@+id/displayTextView"
         android:layout_alignStart="@+id/displayTextView"
-        android:textSize="22sp" />
+        android:textSize="30sp"
+        android:layout_alignRight="@+id/displayTextView"
+        android:layout_alignEnd="@+id/displayTextView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""
         android:id="@+id/operationTextView"
-        android:textAlignment="textEnd"
-        android:layout_below="@+id/resultTextView"
-        android:layout_alignRight="@+id/resultTextView"
-        android:layout_alignEnd="@+id/resultTextView"
-        android:textSize="22sp" />
+        android:textSize="30sp"
+        android:layout_alignBottom="@+id/eraseButton"
+        android:layout_alignRight="@+id/divideButton"
+        android:layout_alignEnd="@+id/divideButton" />
 
 </RelativeLayout>
