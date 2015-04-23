@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -14,9 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -65,14 +65,19 @@ public class ThirdApp extends ActionBarActivity {
     public static class PlaceholderFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 
         //Path to the music folder.
+        final int UPDATE_TIME = 100;
         final String MEDIA_PATH = new String("/sdcard/Music/");
-        TextView filePath;
-        TextView fileName;
-        TextView intentResultCode;
+        TextView currentSongTimeTextView;
+        TextView songLengthTextView;
+//        TextView filePath;
+//        TextView fileName;
+//        TextView intentResultCode;
         Button playSongButton;
         int YOUR_RESULT_CODE;
         MediaPlayer mp;
         boolean prepared;
+        Handler seekBarHandler;
+        SeekBar seekBar;
         //private ArrayList<MediaStore.Audio.Media>
         //private ArrayList<HashMap<String, String>> songList = new ArrayList<HashMap<String, String>>();
 
@@ -82,12 +87,17 @@ public class ThirdApp extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_third_app_debug, container, false);
+//            View rootView = inflater.inflate(R.layout.fragment_third_app_debug, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_third_app, container, false);
 
-            filePath = (TextView) rootView.findViewById(R.id.filePath);
-            fileName = (TextView) rootView.findViewById(R.id.fileName);
-            intentResultCode = (TextView) rootView.findViewById(R.id.intentResultCode);
+//            filePath = (TextView) rootView.findViewById(R.id.filePath);
+//            fileName = (TextView) rootView.findViewById(R.id.fileName);
+//            intentResultCode = (TextView) rootView.findViewById(R.id.intentResultCode);
+            currentSongTimeTextView = (TextView) rootView.findViewById(R.id.currentSongTimeTextView);
+            songLengthTextView = (TextView) rootView.findViewById(R.id.songLengthTextView);
             playSongButton = (Button) rootView.findViewById(R.id.playSongButton);
+            seekBarHandler = new Handler();
+            seekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
             playSongButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -104,6 +114,9 @@ public class ThirdApp extends ActionBarActivity {
                         try {
                             mp.prepare();
                             mp.start();
+                            seekBarHandler.postDelayed(
+                                    new SeekBarUpdate(mp, currentSongTimeTextView, 1000)
+                                    , UPDATE_TIME);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -128,20 +141,22 @@ public class ThirdApp extends ActionBarActivity {
                     String type = data.getType();
                     Log.d("s3ns3i: ", uri + " " + type);
                     if(uri != null) {
-                        filePath.setText(data.getData().getEncodedPath());
+//                        filePath.setText(data.getData().getEncodedPath());
                         String path = uri.getPath();
-                        fileName.setText(path);
+//                        fileName.setText(path);
                         mp = new MediaPlayer();
                         mp.setOnPreparedListener(this);
                         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
                         try {
                             mp.setDataSource(getActivity().getApplicationContext(), uri);
+                            mp.prepare();
+                            songLengthTextView.setText(TimeConvert.convertFromMilliseconds(mp.getDuration()));
 //                            mp.setDataSource(path);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
-                    intentResultCode.setText(String.valueOf(YOUR_RESULT_CODE));
+//                    intentResultCode.setText(String.valueOf(YOUR_RESULT_CODE));
                 }
             }
         }

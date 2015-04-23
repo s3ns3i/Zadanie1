@@ -36,6 +36,10 @@
             android:name=".SplashScreen"
             android:label="@string/title_activity_splash_screen_acitvity" >
         </activity>
+        <activity
+            android:name=".FourthApp"
+            android:label="@string/title_activity_fourth_app" >
+        </activity>
     </application>
 
 </manifest>

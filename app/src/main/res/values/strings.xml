@@ -33,5 +33,6 @@
     <string name="title_activity_splash_screen_acitvity">SplashScreenAcitvity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_fourth_app">FourthApp</string>
 
 </resources>
