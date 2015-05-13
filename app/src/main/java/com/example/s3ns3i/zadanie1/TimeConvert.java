@@ -56,7 +56,7 @@ public class TimeConvert {
             }
         }
         // Return converted time.
-        return String.valueOf(hours) + ":" + String.valueOf(minutes) + ":" + String.valueOf(seconds);
+        return String.valueOf(hours) + ":" + String.valueOf(minutes) + ":" + String.valueOf(seconds_);
     }
 
     /**
@@ -92,7 +92,7 @@ public class TimeConvert {
         }
         // Return converted time.
         return String.valueOf(hours) + ":" + String.valueOf(minutes)
-                + ":" + String.valueOf(seconds);// + ":" + String.valueOf(milliseconds_);
+                + ":" + String.valueOf(seconds) + ":" + String.valueOf(milliseconds_);
     }
 
     /**

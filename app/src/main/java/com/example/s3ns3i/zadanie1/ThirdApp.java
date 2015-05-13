@@ -1,12 +1,13 @@
 package com.example.s3ns3i.zadanie1;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +19,10 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 
 
+//public class ThirdApp extends ActionBarActivity {
 public class ThirdApp extends ActionBarActivity {
 
     @Override
@@ -30,7 +30,7 @@ public class ThirdApp extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third_app);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
@@ -66,7 +66,7 @@ public class ThirdApp extends ActionBarActivity {
 
         //Path to the music folder.
         final int UPDATE_TIME = 100;
-        final String MEDIA_PATH = new String("/sdcard/Music/");
+//        final String MEDIA_PATH = Environment.DIRECTORY_MUSIC;
         TextView currentSongTimeTextView;
         TextView songLengthTextView;
 //        TextView filePath;
@@ -80,6 +80,8 @@ public class ThirdApp extends ActionBarActivity {
         SeekBar seekBar;
         //private ArrayList<MediaStore.Audio.Media>
         //private ArrayList<HashMap<String, String>> songList = new ArrayList<HashMap<String, String>>();
+
+        Button openPlaylistButton;
 
         public PlaceholderFragment() {
         }
@@ -98,6 +100,19 @@ public class ThirdApp extends ActionBarActivity {
             playSongButton = (Button) rootView.findViewById(R.id.playSongButton);
             seekBarHandler = new Handler();
             seekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
+
+            openPlaylistButton = (Button) rootView.findViewById(R.id.openPlaylistButton);
+            openPlaylistButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager fragmentManager = getFragmentManager();
+
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, new PlaylistFragment())
+                    .commit();
+                }
+            });
+
             playSongButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -123,10 +138,10 @@ public class ThirdApp extends ActionBarActivity {
                     }
                 }
             });
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("file/*");
-            YOUR_RESULT_CODE = 1337;
-            startActivityForResult(intent, YOUR_RESULT_CODE);
+//            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.setType("file/*");
+//            YOUR_RESULT_CODE = 1337;
+//            startActivityForResult(intent, YOUR_RESULT_CODE);
             //Reading songs from our folder.
             //getPlaylist();
             return rootView;
@@ -142,7 +157,7 @@ public class ThirdApp extends ActionBarActivity {
                     Log.d("s3ns3i: ", uri + " " + type);
                     if(uri != null) {
 //                        filePath.setText(data.getData().getEncodedPath());
-                        String path = uri.getPath();
+//                        String path = uri.getPath();
 //                        fileName.setText(path);
                         mp = new MediaPlayer();
                         mp.setOnPreparedListener(this);
@@ -150,6 +165,7 @@ public class ThirdApp extends ActionBarActivity {
                         try {
                             mp.setDataSource(getActivity().getApplicationContext(), uri);
                             mp.prepare();
+                            currentSongTimeTextView.setText(mp.getDuration());
                             songLengthTextView.setText(TimeConvert.convertFromMilliseconds(mp.getDuration()));
 //                            mp.setDataSource(path);
                         } catch (IOException e) {
@@ -158,20 +174,6 @@ public class ThirdApp extends ActionBarActivity {
                     }
 //                    intentResultCode.setText(String.valueOf(YOUR_RESULT_CODE));
                 }
-            }
-        }
-
-        private void getPlaylist(){
-            File musicFolder = new File(MEDIA_PATH);
-
-            //Inner class that lists files with extension .mp3 and .MP3
-            if(musicFolder.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String filename) {
-                    return (filename.endsWith(".mp3") || filename.endsWith(".MP3"));
-                }
-            }).length > 0){
-
             }
         }
 
