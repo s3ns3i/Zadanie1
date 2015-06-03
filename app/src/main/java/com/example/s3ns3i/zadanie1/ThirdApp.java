@@ -129,9 +129,9 @@ public class ThirdApp extends ActionBarActivity {
                         try {
                             mp.prepare();
                             mp.start();
-                            seekBarHandler.postDelayed(
-                                    new SeekBarUpdate(mp, currentSongTimeTextView, 1000)
-                                    , UPDATE_TIME);
+//                            seekBarHandler.postDelayed(
+//                                    new SeekBarUpdate(mp, currentSongTimeTextView, 1000)
+//                                    , UPDATE_TIME);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

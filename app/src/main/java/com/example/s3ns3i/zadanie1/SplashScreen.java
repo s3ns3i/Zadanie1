@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ImageView;
 
-public class SplashScreen extends Activity {
+public class SplashScreen extends Activity implements View.OnClickListener{
 
+    ImageView imageView;
     /**
      * Duration of wait *
      */
@@ -20,6 +23,9 @@ public class SplashScreen extends Activity {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splash_screen);
 
+        imageView = (ImageView) findViewById(R.id.splashscreen);
+        imageView.setOnClickListener(this);
+
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable() {
@@ -31,5 +37,10 @@ public class SplashScreen extends Activity {
                 SplashScreen.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
+    }
+
+    @Override
+    public void onClick(View v) {
+        this.finish();
     }
 }
