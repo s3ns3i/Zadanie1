@@ -23,7 +23,7 @@ import java.io.IOException;
 
 
 //public class ThirdApp extends ActionBarActivity {
-public class ThirdApp extends ActionBarActivity {
+public class ThirdApp extends ActionBarActivity implements PlaylistFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,11 @@ public class ThirdApp extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(String id, String path) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -86,15 +91,26 @@ public class ThirdApp extends ActionBarActivity {
         public PlaceholderFragment() {
         }
 
+        public static PlaceholderFragment newInstance(String name, String path) {
+            if(name == null || path == null){
+                return new PlaceholderFragment();
+            }
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putString("name", name);
+            args.putString("path", path);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 //            View rootView = inflater.inflate(R.layout.fragment_third_app_debug, container, false);
             View rootView = inflater.inflate(R.layout.fragment_third_app, container, false);
 
-//            filePath = (TextView) rootView.findViewById(R.id.filePath);
-//            fileName = (TextView) rootView.findViewById(R.id.fileName);
-//            intentResultCode = (TextView) rootView.findViewById(R.id.intentResultCode);
+
+            // TODO ZRÓB TUTAJ ODEBRANIE ITEMÓW Z BUNDLA.
             currentSongTimeTextView = (TextView) rootView.findViewById(R.id.currentSongTimeTextView);
             songLengthTextView = (TextView) rootView.findViewById(R.id.songLengthTextView);
             playSongButton = (Button) rootView.findViewById(R.id.playSongButton);
@@ -108,8 +124,8 @@ public class ThirdApp extends ActionBarActivity {
                     FragmentManager fragmentManager = getFragmentManager();
 
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, new PlaylistFragment())
-                    .commit();
+                            .replace(R.id.container, PlaylistFragment.newInstance())
+                            .commit();
                 }
             });
 

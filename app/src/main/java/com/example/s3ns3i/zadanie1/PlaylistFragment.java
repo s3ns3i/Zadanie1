@@ -1,6 +1,7 @@
 package com.example.s3ns3i.zadanie1;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Environment;
@@ -31,12 +32,10 @@ import java.util.ArrayList;
  */
 public class PlaylistFragment extends Fragment implements AbsListView.OnItemClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String CURRENT_SONG = "currentSong";
 //    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mCurrentSong;
 //    private String mParam2;
 
@@ -53,20 +52,20 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
      */
     private ListAdapter mPlaylistAdapter;
 
-    private File musicFolder = new File(Environment.DIRECTORY_MUSIC);
+    private File musicFolder;
 
     private File[] songs;
 
     private ArrayList<String> songsNames;
 
-    // TODO: Rename and change types of parameters
     public static PlaylistFragment newInstance() {
-        PlaylistFragment fragment = new PlaylistFragment();
+        return new PlaylistFragment();
+//        PlaylistFragment fragment = new PlaylistFragment();
 //        Bundle args = new Bundle();
 //        args.putString(CURRENT_SONG, param1);
 //        args.putString(ARG_PARAM2, param2);
 //        fragment.setArguments(args);
-        return fragment;
+//        return fragment;
     }
 
     /**
@@ -86,6 +85,9 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
         }
 
         //Reading files from music folder
+//        musicFolder = new File(Environment.DIRECTORY_MUSIC);
+        String path = Environment.getExternalStorageDirectory().toString()+"/Music";
+        musicFolder = new File(path);
         songs = musicFolder.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String filename) {
@@ -139,7 +141,13 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+//            mListener.onFragmentInteraction(songsNames.get(position), songs[position].getPath());
+            FragmentManager fragmentManager = getFragmentManager();
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new ThirdApp.PlaceholderFragment()
+                            .newInstance(songsNames.get(position), songs[position].getPath()))
+                    .commit();
         }
     }
 
@@ -168,7 +176,7 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        public void onFragmentInteraction(String id, String path);
     }
 
     private void getPlaylist(){
@@ -179,8 +187,8 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
             }
         });
         ArrayList<String> songsNames = new ArrayList<>();
-        for(int i = 0; i < songs.length; i++) {
-            songsNames.add(songs[i].getName());
+        for (File song : songs) {
+            songsNames.add(song.getName());
         }
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("songsNames", songsNames);
