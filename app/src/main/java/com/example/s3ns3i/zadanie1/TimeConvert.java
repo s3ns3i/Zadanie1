@@ -70,11 +70,11 @@ public class TimeConvert {
         Integer seconds = 0;
         Integer milliseconds_ = milliseconds;
         // If there are more milliseconds than 99...
-        if(milliseconds_ >= 100) {
+        if(milliseconds_ >= 1000) {
             // Divide it and get number of seconds
-            seconds = milliseconds_ / 100;
+            seconds = milliseconds_ / 1000;
             // Get number of remaining milliseconds.
-            milliseconds_ = milliseconds_ - seconds * 100;
+            milliseconds_ = milliseconds_ - seconds * 1000;
             // If there are more seconds than 59...
             if (seconds >= 60) {
                 // Divide it and get number of minutes
@@ -91,8 +91,11 @@ public class TimeConvert {
             }
         }
         // Return converted time.
-        return String.valueOf(hours) + ":" + String.valueOf(minutes)
-                + ":" + String.valueOf(seconds) + ":" + String.valueOf(milliseconds_);
+        if(hours == 0)
+            return String.valueOf(minutes) + ":" + String.valueOf(seconds);
+        else
+            return String.valueOf(hours) + ":" + String.valueOf(minutes)
+                + ":" + String.valueOf(seconds);
     }
 
     /**

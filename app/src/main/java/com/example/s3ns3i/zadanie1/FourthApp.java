@@ -61,7 +61,7 @@ public class FourthApp extends ActionBarActivity {
         String URL = "http://www.nbp.pl/kursy/xml/a025z100205.xml";
         XmlPullParser xmlPullParser;
         XMLParser xmlParser = new XMLParser();
-        ArrayList<Object> list = xmlParser.parse()
+        //ArrayList<Object> list = xmlParser.parse()
 
         public PlaceholderFragment() {
         }

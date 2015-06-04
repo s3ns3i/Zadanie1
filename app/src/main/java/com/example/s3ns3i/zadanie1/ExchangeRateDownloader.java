@@ -22,13 +22,14 @@ public class ExchangeRateDownloader extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
-        try{
-            return loadXmlFromNetwork(urls[0]);
-        } catch(IOException e){
-            return getResources().getString(R.string.connection_error);
-        } catch (XmlPullParserException e) {
-            return getResources().getString(R.string.xml_error);
-        }
+//        try{
+//            return loadXmlFromNetwork(urls[0]);
+//        } catch(IOException e){
+//            return getResources().getString(R.string.connection_error);
+//        } catch (XmlPullParserException e) {
+//            return getResources().getString(R.string.xml_error);
+//        }
+        return null;
     }
 
 //    @Override
@@ -41,7 +42,7 @@ public class ExchangeRateDownloader extends AsyncTask<String, Void, String> {
         InputStream stream = null;
         XMLParser xmlParser = new XMLParser();
         ArrayList<Object> entries = null;
-        String
+//        String
 
     }
 }
