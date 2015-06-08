@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Timer;
 
 /**
  * A fragment representing a list of Items.
@@ -32,7 +31,7 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String CURRENT_SONG = "currentSong";
 
-    private String mCurrentSong;
+    private int mCurrentSong;
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,11 +53,10 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
      */
     private ArrayList<String> songsNames;
 
-    public static PlaylistFragment newInstance(String index) {
-//        return new PlaylistFragment();
+    public static PlaylistFragment newInstance(int index) {
         PlaylistFragment fragment = new PlaylistFragment();
         Bundle args = new Bundle();
-        args.putString(CURRENT_SONG, index);
+        args.putInt(CURRENT_SONG, index);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,7 +77,7 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
          * It will be used f.e. for marking currently playing song.
          */
         if (getArguments() != null) {
-            mCurrentSong = getArguments().getString(CURRENT_SONG);
+            mCurrentSong = getArguments().getInt(CURRENT_SONG);
         }
 
         /**
@@ -108,6 +106,7 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
          */
         mPlaylistAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, songsNames);
+        mListener.sendPlaylist(songs);
     }
 
     @Override
@@ -151,7 +150,7 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(songsNames.get(position), songs[position].getPath(), Long.toString(position));
+            mListener.onFragmentInteraction(position);
         }
     }
 
@@ -181,11 +180,10 @@ public class PlaylistFragment extends Fragment implements AbsListView.OnItemClic
     public interface OnFragmentInteractionListener {
         /**
          * It will send index of the song and path to the file.
-         * @param songName - name of the current song.
-         * @param songPath - path of the current file.
          * @param songIndex - current index at playlist.
          */
-        void onFragmentInteraction(String songName, String songPath, String songIndex);
+        void onFragmentInteraction(int songIndex);
+        void sendPlaylist(File[] songs);
     }
 
 }

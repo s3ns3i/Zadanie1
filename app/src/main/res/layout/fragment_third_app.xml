@@ -6,31 +6,31 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="&lt;"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/previousSongButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/previous_button" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/playSongButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/play_button" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=">"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/nextSongButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/next_button" />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -60,56 +60,81 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Loop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/loopPlaylistButton"
         android:layout_above="@+id/currentSongTimeTextView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/repeat_button" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Shuffle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/shufflePlaylistButton"
         android:layout_alignBottom="@+id/loopPlaylistButton"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/shuffle_button" />
 
-    <ImageButton
-        android:layout_width="192dp"
-        android:layout_height="192dp"
-        android:id="@+id/songImageButton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+    <ImageView
+        android:layout_width="320dp"
+        android:layout_height="180dp"
+        android:id="@+id/songImageView"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/openPlaylistButton"
-        android:layout_above="@+id/shufflePlaylistButton"
-        android:layout_alignRight="@+id/songLengthTextView"
-        android:layout_alignEnd="@+id/songLengthTextView" />
+        android:background="@drawable/playlist_button"
+        android:layout_above="@+id/songLengthTextView"
+        android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/songNameTextView"
-        android:layout_below="@+id/songImageButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button10"
+    <TableLayout
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/button9"
-        android:layout_alignStart="@+id/button9" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/songImageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/titleLabel"
+                android:text="@string/title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/songTitleTextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/artist"
+                android:id="@+id/artistLabel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/songArtistTextView" />
+        </TableRow>
+
+    </TableLayout>
+
 </RelativeLayout>

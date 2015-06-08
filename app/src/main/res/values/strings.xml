@@ -31,8 +31,9 @@
     <string name="song_info">Title: \nArtist:\nAlbum:\nGenre:\nYear:</string>
     <string name="thirdApp">Odtwarzacz MP3</string>
     <string name="title_activity_splash_screen_acitvity">SplashScreenAcitvity</string>
+    <string name="title">Title:</string>
+    <string name="artist">Artist:</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_fourth_app">FourthApp</string>
 
 </resources>

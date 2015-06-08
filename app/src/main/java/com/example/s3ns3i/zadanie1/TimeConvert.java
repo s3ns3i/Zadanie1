@@ -16,7 +16,19 @@ public class TimeConvert {
      * @return - returns time in format "hh:mm:ss"
      */
     static public String convert(Integer hours, Integer minutes, Integer seconds){
-        return String.valueOf(hours) + ":" + String.valueOf(minutes) + ":" + String.valueOf(seconds);
+        String time = "";
+        if(hours != 0)
+            time = String.valueOf(hours) + ":";
+        if(minutes < 10)
+            time += "0" + String.valueOf(minutes) + ":";
+        else
+            time += String.valueOf(minutes) + ":";
+        if(seconds < 10)
+            time += "0" + String.valueOf(seconds);
+        else
+            time += String.valueOf(seconds);
+        return time;
+//        return String.valueOf(hours) + ":" + String.valueOf(minutes) + ":" + String.valueOf(seconds);
     }
 
     /**
@@ -28,8 +40,21 @@ public class TimeConvert {
      * @return - returns time in format "hh:mm:ss"
      */
     static public String convert(Integer hours, Integer minutes, Integer seconds, Integer milliseconds){
-        return String.valueOf(hours) + ":" + String.valueOf(minutes)
-                + ":" + String.valueOf(seconds) + ":" + String.valueOf(milliseconds);
+        String time = "";
+        if(hours != 0)
+            time = String.valueOf(hours) + ":";
+        if(minutes < 10)
+            time += "0" + String.valueOf(minutes) + ":";
+        else
+            time += String.valueOf(minutes) + ":";
+        if(seconds < 10)
+            time += "0" + String.valueOf(seconds);
+        else
+            time += String.valueOf(seconds) + ":";
+        time += String.valueOf(milliseconds);
+        return time;
+//        return String.valueOf(hours) + ":" + String.valueOf(minutes)
+//                + ":" + String.valueOf(seconds) + ":" + String.valueOf(milliseconds);
     }
 
     /**
@@ -56,7 +81,17 @@ public class TimeConvert {
             }
         }
         // Return converted time.
-        return String.valueOf(hours) + ":" + String.valueOf(minutes) + ":" + String.valueOf(seconds_);
+        String time = String.valueOf(hours) + ":";
+        if(minutes < 10)
+            time += "0" + String.valueOf(minutes) + ":";
+        else
+            time += String.valueOf(minutes) + ":";
+        if(seconds < 10)
+            time += "0" + String.valueOf(seconds_);
+        else
+            time += String.valueOf(seconds_);
+        return time;
+//        return String.valueOf(hours) + ":" + String.valueOf(minutes) + ":" + String.valueOf(seconds_);
     }
 
     /**
@@ -91,11 +126,23 @@ public class TimeConvert {
             }
         }
         // Return converted time.
-        if(hours == 0)
-            return String.valueOf(minutes) + ":" + String.valueOf(seconds);
+        String time = "";
+        if(hours != 0)
+            time = String.valueOf(hours) + ":";
+        if(minutes < 10)
+            time += "0" + String.valueOf(minutes) + ":";
         else
-            return String.valueOf(hours) + ":" + String.valueOf(minutes)
-                + ":" + String.valueOf(seconds);
+            time += String.valueOf(minutes) + ":";
+        if(seconds < 10)
+            time += "0" + String.valueOf(seconds);
+        else
+            time += String.valueOf(seconds);
+        return time;
+//        if(hours == 0)
+//            return String.valueOf(minutes) + ":" + String.valueOf(seconds);
+//        else
+//            return String.valueOf(hours) + ":" + String.valueOf(minutes)
+//                + ":" + String.valueOf(seconds);
     }
 
     /**

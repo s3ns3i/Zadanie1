@@ -2,6 +2,7 @@ package com.example.s3ns3i.zadanie1;
 
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ public class MediaPlayerTimer extends TimerTask {
     public MediaPlayerTimer(TextView currentTimeTextView, MediaPlayer mediaPlayer){
         this.currentTimeTextView = currentTimeTextView;
         this.mediaPlayer = mediaPlayer;
-        handler = new Handler();
+        handler = new Handler(Looper.getMainLooper());
     }
     @Override
     public void run() {
