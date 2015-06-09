@@ -106,7 +106,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/titleLabel"
                 android:text="@string/title" />
 
@@ -124,7 +124,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/artist"
                 android:id="@+id/artistLabel" />
 
@@ -136,5 +136,25 @@
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="OFF"
+        android:id="@+id/loopLabel"
+        android:layout_alignTop="@+id/loopPlaylistButton"
+        android:layout_toRightOf="@+id/currentSongTimeTextView"
+        android:layout_toEndOf="@+id/currentSongTimeTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="OFF"
+        android:id="@+id/shuffleLabel"
+        android:layout_alignTop="@+id/shufflePlaylistButton"
+        android:layout_toLeftOf="@+id/songLengthTextView"
+        android:layout_toStartOf="@+id/songLengthTextView" />
 
 </RelativeLayout>

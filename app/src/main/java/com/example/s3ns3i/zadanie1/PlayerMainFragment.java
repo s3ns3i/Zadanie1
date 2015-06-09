@@ -20,7 +20,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.io.File;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 /**
@@ -61,15 +62,23 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
     /**
      * Plays and pauses song.
      */
+    TextView shuffleLabel;
+    TextView loopLabel;
+
     Button playSongButton;
     Button previousSongButton;
     Button nextSongButton;
+    Button shuffleButton;
+    Button loopButton;
     /**
      * Plays music.
      */
     MediaPlayer mp;
     //
     boolean prepared;
+    boolean playOnNext;
+    boolean shuffle;
+    boolean loop;
     //
     Handler seekBarHandler;
     //
@@ -116,12 +125,15 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
          * It will be used f.e. for marking currently playing song.
          */
         activity = (ThirdApp) getActivity();
+        loop = activity.isLoop();
+        shuffle = activity.isShuffle();
         currentSong = new Song();
         if (getArguments() != null) {
             prepareSong(getArguments().getInt(INDEX));
         }
         else
             currentSong.setIndex(0);
+        playOnNext = true;
     }
 
     @Override
@@ -137,6 +149,8 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
         songLengthTextView = (TextView) rootView.findViewById(R.id.songLengthTextView);
         songTitleTextView = (TextView) rootView.findViewById(R.id.songTitleTextView);
         songArtistTextView = (TextView) rootView.findViewById(R.id.songArtistTextView);
+        shuffleLabel = (TextView) rootView.findViewById(R.id.shuffleLabel);
+        loopLabel = (TextView) rootView.findViewById(R.id.loopLabel);
 
         mp = activity.getMediaPlayer();
         if(mp != null) {
@@ -145,6 +159,8 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
         playSongButton = (Button) rootView.findViewById(R.id.playSongButton);
         previousSongButton = (Button) rootView.findViewById(R.id.previousSongButton);
         nextSongButton = (Button) rootView.findViewById(R.id.nextSongButton);
+        shuffleButton = (Button) rootView.findViewById(R.id.shufflePlaylistButton);
+        loopButton = (Button) rootView.findViewById(R.id.loopPlaylistButton);
         seekBarHandler = new Handler();
         seekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
 
@@ -158,6 +174,7 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
+                    playOnNext = true;
                     mListener.onPlaylistOpen(currentSong.getIndex());
                 }
             }
@@ -172,6 +189,7 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
                 // Check if song is playing.
                 if (mp != null) {
                     if (mp.isPlaying()) {
+                        playOnNext = false;
                         mp.stop();
                         playSongButton.setBackgroundResource(R.drawable.play_button);
                         //Set flag to false.
@@ -179,6 +197,7 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
                     } else if (!prepared) {
                         try {
                             mp.prepare();
+                            playOnNext = true;
                             mp.start();
                             playSongButton.setBackgroundResource(R.drawable.pause_button);
                         } catch (IOException e) {
@@ -193,7 +212,12 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
             @Override
             public void onClick(View v) {
                 int i = currentSong.getIndex();
-                prepareSong(--i);
+                if(shuffle)
+                    prepareSong(-100);
+                else if(loop)
+                    prepareSong(-101);
+                else
+                    prepareSong(--i);
                 // Also Update UI.
                 updateUI();
             }
@@ -203,9 +227,46 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
             @Override
             public void onClick(View v) {
                 int i = currentSong.getIndex();
-                prepareSong(++i);
+                if(shuffle)
+                    prepareSong(-100);
+                else if(loop)
+                    prepareSong(-101);
+                else
+                    prepareSong(++i);
                 // Also Update UI.
                 updateUI();
+            }
+        });
+
+        shuffleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(shuffle){
+                    shuffle = false;
+                    activity.setShuffle(false);
+                    shuffleLabel.setText("OFF");
+                }
+                else{
+                    shuffle = true;
+                    activity.setShuffle(true);
+                    shuffleLabel.setText("ON");
+                }
+            }
+        });
+
+        loopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(loop){
+                    loop = false;
+                    activity.setLoop(false);
+                    loopLabel.setText("OFF");
+                }
+                else{
+                    loop = true;
+                    activity.setLoop(true);
+                    loopLabel.setText("ON");
+                }
             }
         });
 
@@ -213,16 +274,21 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
     }
 
     private void prepareSong(int index){
+//        File file;
+//        file = mListener.changeSong(index);
+//        currentSong.setName(file.getName());
+//        currentSong.setPath(file.getPath());
         //Getting song from activity.
-        File file;
-        file = mListener.changeSong(index);
-        currentSong.setName(file.getName());
-        currentSong.setPath(file.getPath());
+        currentSong = mListener.changeSong(index);
+        // If index is the same, then return. We don't need to play the same song from the start,
+        // user might just changed his mind and closed playlist
         if(activity.getCurrentIndex() == index)
             return;
-        currentSong.setIndex(index);
-        activity.setCurrentIndex(index);
-        Uri uri = Uri.parse(file.getPath());
+//        currentSong.setIndex(index);
+        currentSong.setIndex(currentSong.getIndex());
+        activity.setCurrentIndex(currentSong.getIndex());
+//        Uri uri = Uri.parse(file.getPath());
+        Uri uri = Uri.parse(currentSong.getPath());
         Log.d("s3ns3i: ", uri.toString());
         // Prepare song.
         if(uri != null) {
@@ -233,6 +299,7 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
                 mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
             }
             if(mp.isPlaying()) {
+                playOnNext = true;
                 mp.stop();
                 playSongButton.setBackgroundResource(R.drawable.play_button);
             }
@@ -257,11 +324,25 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
             songImageView.setImageBitmap(bitmap);
             songImageView.setAdjustViewBounds(false);
         }
+        else
+            songImageView.setImageBitmap(null);
         songLengthTextView.setText(TimeConvert.convertFromMilliseconds(mp.getDuration()));
         songTitleTextView.setText(
                 mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
         songArtistTextView.setText(
                 mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
+        if(shuffle){
+            shuffleLabel.setText("ON");
+        }
+        else{
+            shuffleLabel.setText("OFF");
+        }
+        if(loop){
+            loopLabel.setText("ON");
+        }
+        else{
+            loopLabel.setText("OFF");
+        }
     }
 
     @Override
@@ -272,9 +353,12 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
     @Override
     public void onPrepared(MediaPlayer mp) {
         prepared = true;
-        playSongButton.setBackgroundResource(R.drawable.pause_button);
 //        playSongButton.setText("Pause");
-        mp.start();
+        if (playOnNext){
+            playSongButton.setBackgroundResource(R.drawable.pause_button);
+            mp.start();
+            playOnNext = false;
+        }
     }
 
     public interface OnFragmentInteractionListener {
@@ -289,6 +373,7 @@ public class PlayerMainFragment extends Fragment implements MediaPlayer.OnPrepar
          * @param index - index of the song we currently want.
          * @return
          */
-        File changeSong(int index);
+//        File changeSong(int index);
+        Song changeSong(int index);
     }
 }

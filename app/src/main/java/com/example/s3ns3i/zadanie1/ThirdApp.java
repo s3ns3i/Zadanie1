@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import java.io.File;
+import java.util.Random;
 
 public class ThirdApp extends Activity
         implements PlaylistFragment.OnFragmentInteractionListener
@@ -23,7 +24,26 @@ public class ThirdApp extends Activity
     private File[] songs;
     private int index = 0;
 
-    private int currentIndex = 0;
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+
+    public boolean isShuffle() {
+        return shuffle;
+    }
+
+    public void setShuffle(boolean shuffle) {
+        this.shuffle = shuffle;
+    }
+
+    boolean loop;
+    boolean shuffle;
+
+    private int currentIndex = 100000000;
     public int getCurrentIndex() {
         return currentIndex;
     }
@@ -89,18 +109,55 @@ public class ThirdApp extends Activity
     }
 
     @Override
-    public File changeSong(int index) {
-        if(index < 0) {
-            this.index = index;
-            return songs[songs.length];
+    public Song changeSong(int index){
+        // This is considering playback! If user selects song, see code below
+        // This means that shuffle option is enabled.
+        if(index == -100){
+            int number = this.index;
+            while(this.index == number){
+                number = generateRandomNumber(0, songs.length - 1);
+            }
+            this.index = number;
+        }
+        // This means that loop option is enabled.
+        else if(index == -101) {
+            this.index++;
+            if (this.index < 0) {
+                this.index = songs.length - 1;
+            } else if (this.index >= songs.length) {
+                this.index = 0;
+            }
+        }
+        else if(index < 0) {
+            this.index = songs.length - 1;
         }
         else if (index >= songs.length) {
-            this.index = index;
-            return songs[0];
+            this.index = 0;
         }
         else {
             this.index = index;
-            return songs[this.index];
         }
+        Song song = new Song(songs[this.index].getName(), songs[this.index].getPath(), this.index);
+        return song;
     }
+
+    private int generateRandomNumber(int minimum, int maximum){
+        Random generator = new Random();
+        return generator.nextInt(maximum) + minimum;
+    }
+//    @Override
+//    public File changeSong(int index) {
+//        if(index < 0) {
+//            this.index = index;
+//            return songs[songs.length];
+//        }
+//        else if (index >= songs.length) {
+//            this.index = index;
+//            return songs[0];
+//        }
+//        else {
+//            this.index = index;
+//            return songs[this.index];
+//        }
+//    }
 }

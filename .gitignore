@@ -24,3 +24,5 @@ local.properties
 .idea/gradle.xml
 .idea/misc.xml
 Zadanie1.iml
+build.gradle
+.idea/vcs.xml
